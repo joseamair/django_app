@@ -63,6 +63,10 @@ It has the recipe to build the docker image. It is a text document that contains
     sudo systemctl disable docker.service
     sudo systemctl disable containerd.service
     ```
+- check docker images: ```docker images```
+- delete old docker images: ```docker system prune -a```
+- delete all the images: ```docker rmi $(docker images -a -q)``` 
 
 ## Extra useful commands
 - check registered celery tasks running inside the container: ```docker logs celery | grep '\[tasks\]' -A2```
+- test redis connection: ```docker exec -it redis redis-cli``` or ```docker exec -it redis redis-cli ping```
