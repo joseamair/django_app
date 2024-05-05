@@ -21,6 +21,24 @@ Section of the Course - INDEX:4 [Building a Django Docker Container](https://www
     Enter 1 to select iptables-legacy, Now run sudo service docker start, and Docker will start as expected!
 - install docker compose: https://docs.docker.com/compose/install/linux/
 
+## The Dockerfile
+- [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
+It has the recipe to build the docker image. It is a text document that contains all the commands a user could call on the command line to assemble an image. Using docker build users can create an automated build that executes several command-line instructions in succession.
+
+## The Docker Compose File
+- [Docker Compose reference](https://docs.docker.com/compose/compose-file/)
+- It is a YAML file that defines how Docker containers should behave in production. It is used to define and run multi-container Docker applications. With Compose, you use a YAML file to configure your application's services. Then, with a single command, you create and start all the services from your configuration.
+
+
+## The Don't forget of Docker setup
+- when creating the entrypoint.sh file, make sure to give it the right permissions
+    ```bash
+    chmod +x entrypoint.sh
+    ```
+- when creating the Dockerfile, make sure to give it the right permissions
+    ```bash
+    chmod +x Dockerfile
+    ```
 
 ## Useful commands
 - test docker install: ```docker run hello-world```
@@ -29,8 +47,12 @@ Section of the Course - INDEX:4 [Building a Django Docker Container](https://www
 - check docker processes: ```docker ps```
 - check docker images: ```docker images```
 - check docker logs: ```docker logs <container_id>```
-- build docker image where the Dockerfile Exist: ``` docker compose up -d --build```
+- build docker image where the Dockerfile exists: ``` docker compose up -d --build```
 - stop docker container: ```docker stop <container_id>```
+- shut down all active containers: ```docker stop $(docker ps -a -q)``` 
+- open and run a command in a container: ```docker exec -it <container_id> bash```
+- check logs of a container: ```docker logs <container_id or container name>```
+- check logs live of a container: ```docker logs -f <container_id or container name>```
 - enable Auto Start 
     ```bash
     sudo systemctl enable docker.service
@@ -41,3 +63,6 @@ Section of the Course - INDEX:4 [Building a Django Docker Container](https://www
     sudo systemctl disable docker.service
     sudo systemctl disable containerd.service
     ```
+
+## Extra useful commands
+- check registered celery tasks running inside the container: ```docker logs celery | grep '\[tasks\]' -A2```
